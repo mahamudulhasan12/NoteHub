@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notehub/Screen/custom_container.dart';
+import 'package:notehub/widgets/custom_container.dart';
 import 'package:notehub/Screen/home_screen.dart';
 import 'package:notehub/widgets/custom_text.dart';
 

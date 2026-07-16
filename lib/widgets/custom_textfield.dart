@@ -7,11 +7,13 @@ class CustomTextfield extends StatelessWidget {
     required this.controller,
     this.inputType,
     required this.hintText,
+    this.hintStyle,
   });
   final InputBorder ? outlineBorder;
   final TextEditingController controller;
   final TextInputType ? inputType;
   final String hintText;
+  final TextStyle ? hintStyle;
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -19,6 +21,7 @@ class CustomTextfield extends StatelessWidget {
       keyboardType: inputType,
       decoration: InputDecoration(
         hintText: hintText,
+        hintStyle: hintStyle,
         border: outlineBorder,
       ),
     );
