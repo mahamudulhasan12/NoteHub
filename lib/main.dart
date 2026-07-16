@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'Screen/home_screen.dart';
+import 'Screen/splash_screen.dart';
 
 void main(){
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }
