@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notehub/Screen/add_task_screen.dart';
+import 'package:notehub/Screen/login_screen.dart';
+import 'package:notehub/Screen/profile_screen.dart';
 import 'package:notehub/widgets/custom_appbar.dart';
+import 'package:notehub/widgets/custom_listtile.dart';
 import 'package:notehub/widgets/custom_text.dart';
 import 'package:notehub/widgets/task_card.dart';
 
@@ -68,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       drawer: Drawer(
+        width: 270,
           child: ListView(
             children: [
               DrawerHeader(
@@ -79,22 +83,83 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Row(
                       children: [
-                        CustomContainer(height: 50, width: 50, decoration:BoxDecoration(
-                          shape: BoxShape.circle,
+                        CustomContainer(height: 60, width: 60, decoration:BoxDecoration(
+                          shape: BoxShape.circle,border: BoxBorder.all(width: 2,color: Colors.grey)
                         ),
                           child: CircleAvatar(
                             radius: 20,
-                            child: Icon(Icons.person,size: 30,),
+                            child: Icon(Icons.person,size: 50,color: Colors.white,),
                           ),
                         ),
+
                       ],
-                    )
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CustomText(text: "Mahamudul Hasan",textStyle: TextStyle(
+                          fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white
+                        ),)
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CustomText(text: "mahamudulhasna459@gmail.com",textStyle: TextStyle(
+                            fontSize: 12,fontWeight: FontWeight.bold,color: Colors.white
+                        ),)
+                      ],
+                    ),
                   ],
                 ),
+              ),
+              CustomListTile(leading: Icon(Icons.home,size: 27,),title: CustomText(text: "Home",textStyle: TextStyle(
+                  fontSize: 16,fontWeight: FontWeight.bold
+              ),),
+                onPress: (){
+
+                },
+              ),
+
+              CustomListTile(leading: Icon(Icons.person,size: 27,),title: CustomText(text: "Profile",textStyle: TextStyle(
+                  fontSize: 16,fontWeight: FontWeight.bold
+              ),),
+                onPress: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+                },
+              ),
+              CustomListTile(leading: Icon(Icons.screen_lock_rotation_outlined,size: 27,),title: CustomText(text: "Login Screen",textStyle: TextStyle(
+                  fontSize: 16,fontWeight: FontWeight.bold
+              ),),
+                onPress: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                },
+              ),
+              CustomListTile(leading: Icon(Icons.settings,size: 27,),title: CustomText(text: "Setting",textStyle: TextStyle(
+                  fontSize: 16,fontWeight: FontWeight.bold
+              ),),
+                onPress: (){
+
+                },
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomListTile(leading: Icon(Icons.logout,size: 27,),title: CustomText(text: "Logout",textStyle: TextStyle(
+                      fontSize: 16,fontWeight: FontWeight.bold,color: Colors.redAccent
+                  ),),
+                    onPress: (){
+
+                    },
+                  ),
+                ],
               )
+
             ],
           )
       ),
     );
   }
 }
+
+
