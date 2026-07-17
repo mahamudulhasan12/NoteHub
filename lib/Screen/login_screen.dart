@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notehub/Screen/home_screen.dart';
 import 'package:notehub/Screen/register_screen.dart';
 import 'package:notehub/widgets/custom_button.dart';
 import 'package:notehub/widgets/custom_container.dart';
@@ -105,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomTextfield(controller: passworld, hintText: 'Enter your password',hintStyle: TextStyle(
                 fontSize: 12,fontWeight: FontWeight.bold,
               ),
-
+                sufixIcon: Icon(Icons.remove_red_eye),
                 outlineBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(width: 0.2,color: Colors.grey)
@@ -141,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(height: 10,),
           CustomButton(height: 50, width: 100, 
               onPressed: (){
-            
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
               },
               buttonStyle:ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
