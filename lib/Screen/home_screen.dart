@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notehub/Screen/add_task_screen.dart';
 import 'package:notehub/Screen/login_screen.dart';
 import 'package:notehub/Screen/profile_screen.dart';
+import 'package:notehub/Screen/setting_screen.dart';
 import 'package:notehub/widgets/custom_appbar.dart';
 import 'package:notehub/widgets/custom_listtile.dart';
 import 'package:notehub/widgets/custom_text.dart';
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),Colors: Colors.blue,CenterTitle: true,
         actions: [
           IconButton(onPressed: (){
-
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
           },
               icon: Icon(Icons.person,size: 30,color: Colors.white,)
           )
@@ -117,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 16,fontWeight: FontWeight.bold
               ),),
                 onPress: (){
-
+                  Navigator.pop(context);
                 },
               ),
 
@@ -139,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 16,fontWeight: FontWeight.bold
               ),),
                 onPress: (){
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingScreen()));
                 },
               ),
               Column(
@@ -149,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 16,fontWeight: FontWeight.bold,color: Colors.redAccent
                   ),),
                     onPress: (){
-
+                      Navigator.pop(context);
                     },
                   ),
                 ],
