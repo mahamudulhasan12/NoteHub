@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:notehub/Screen/Student/student_add.dart';
 import 'package:notehub/Screen/add_task_screen.dart';
 import 'package:notehub/Screen/login_screen.dart';
 import 'package:notehub/Screen/profile_screen.dart';
@@ -76,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
         width: 65,
         child: FloatingActionButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTaskScreen(addData: addData)));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentAdd()));
           },
           backgroundColor: Colors.blue,
           shape:CircleBorder(),

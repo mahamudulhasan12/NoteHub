@@ -154,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
             }else{
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Wrong email or password")),
+                SnackBar(content: Text("Wrong email or password"),backgroundColor: Colors.redAccent,),
               );
             }
               },
