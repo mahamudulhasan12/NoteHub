@@ -12,6 +12,8 @@ class CustomTextfield extends StatelessWidget {
     this.prefixIcon,
     this.prefixIconStyle,
     this.sufixIcon,
+    this.maxline,
+
   });
   final InputBorder ? outlineBorder;
   final TextEditingController controller;
@@ -22,11 +24,13 @@ class CustomTextfield extends StatelessWidget {
   final Widget ? prefixIcon;
   final TextStyle ? prefixIconStyle;
   final Widget ? sufixIcon;
+  final int ? maxline;
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
       keyboardType: inputType,
+      maxLines: maxline ?? 1,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         prefixStyle: prefixIconStyle,
@@ -35,6 +39,7 @@ class CustomTextfield extends StatelessWidget {
         border: outlineBorder,
         fillColor: colors,
         suffixIcon: sufixIcon,
+
       ),
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notehub/Screen/login_screen.dart';
+import 'package:notehub/data/users_data.dart';
+import 'package:notehub/models/user_model.dart';
 
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
@@ -157,7 +159,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
           SizedBox(height: 10,),
           CustomButton(height: 50, width: 100,
               onPressed: (){
-
+            users.add(
+              UsersData(
+                name: name.text,
+                phone: phone.text,
+                email: email.text,
+                password: password.text,
+              )
+            );
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
               },
               buttonStyle:ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
@@ -193,4 +203,5 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notehub/Screen/home_screen.dart';
 import 'package:notehub/Screen/register_screen.dart';
+import 'package:notehub/models/user_model.dart';
 import 'package:notehub/widgets/custom_button.dart';
 import 'package:notehub/widgets/custom_container.dart';
 import 'package:notehub/widgets/custom_text.dart';
@@ -18,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController email =TextEditingController();
   TextEditingController passworld = TextEditingController();
   bool isChack = false;
+  bool isFound = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,7 +144,19 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(height: 10,),
           CustomButton(height: 50, width: 100, 
               onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+            for(var user in users){
+              if(user.email == email.text && user.password == passworld.text){
+                isFound =true;
+                break;
+              }
+            }
+            if(isFound){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+            }else{
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Wrong email or password")),
+              );
+            }
               },
               buttonStyle:ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,

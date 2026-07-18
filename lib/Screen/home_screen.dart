@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:notehub/Screen/add_task_screen.dart';
 import 'package:notehub/Screen/login_screen.dart';
 import 'package:notehub/Screen/profile_screen.dart';
 import 'package:notehub/Screen/setting_screen.dart';
+import 'package:notehub/Screen/view_screen.dart';
+import 'package:notehub/models/task_model.dart';
 import 'package:notehub/widgets/custom_appbar.dart';
 import 'package:notehub/widgets/custom_listtile.dart';
 import 'package:notehub/widgets/custom_text.dart';
@@ -18,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<TaskModel> data =List.empty(growable: true);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,25 +38,34 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body:ListView.builder(
-        itemCount: 10,
+        itemCount: data.length,
         itemBuilder: (BuildContext context , index){
           return  SizedBox(
             height: 100,
             width: double.infinity,
             child: Center(
-              child: CustomTeskCard(
-                colors: Colors.grey[200],
-                leading: CircleAvatar(
-                  radius: 20,
-                  child: CustomText(text: "A"),
+              child: InkWell(
+                onTap: (){
+
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=>NoteViewScreen()));
+
+                },
+                child: CustomTeskCard(
+                  colors: Colors.grey[200],
+                  leading: CircleAvatar(
+                    radius: 10,
+                    child: CustomText(text: "${index +1}"),
+                  ),
+                  title: CustomText(text: "${data[index].title}",textStyle: TextStyle(
+                      fontSize: 17,fontWeight: FontWeight.bold
+                  ),),
+                  subTitle: CustomText(text: "${data[index].subtitle}",textStyle: TextStyle(
+                    fontSize: 13,overflow: TextOverflow.ellipsis,
+                  ),),
+                  trailing: IconButton(onPressed: (){
+                    removeData(index);
+                  }, icon:Icon(Icons.delete)),
                 ),
-                title: CustomText(text: "Hello",textStyle: TextStyle(
-                    fontSize: 16,fontWeight: FontWeight.bold
-                ),),
-                subTitle: CustomText(text: "Tahks your Coder",textStyle: TextStyle(
-                  fontSize: 14,overflow: TextOverflow.ellipsis,
-                ),),
-                trailing: IconButton(onPressed: (){}, icon:Icon(Icons.edit)),
               ),
             ),
           );
@@ -63,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
         width: 65,
         child: FloatingActionButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTaskScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTaskScreen(addData: addData)));
           },
           backgroundColor: Colors.blue,
           shape:CircleBorder(),
@@ -160,6 +173,18 @@ class _HomeScreenState extends State<HomeScreen> {
           )
       ),
     );
+  }
+  void addData(TaskModel note){
+    data.add(note);
+    setState(() {
+
+    });
+  }
+  void removeData(int index){
+    data.removeAt(index);
+    setState(() {
+
+    });
   }
 }
 
