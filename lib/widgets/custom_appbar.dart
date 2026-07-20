@@ -9,6 +9,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget{
     this.Leading,
     this.actions,
     this.Colors,
+    this.bottom,
   });
   final Widget Title;
   final TextStyle ? Style;
@@ -16,9 +17,11 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget{
   final Widget ? Leading;
   final List<Widget> ? actions;
   final Color ? Colors;
+  final PreferredSizeWidget ?  bottom;
   @override
   Widget build(BuildContext context) {
     return AppBar(
+    bottom: bottom,
       title:Title,titleTextStyle: Style,
       centerTitle: CenterTitle,
       leading:Leading ,

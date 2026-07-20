@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+
 import 'package:notehub/Screen/Student/student_add.dart';
+import 'package:notehub/Screen/Student/student_edit.dart';
 import 'package:notehub/Screen/add_task_screen.dart';
 import 'package:notehub/Screen/login_screen.dart';
 import 'package:notehub/Screen/profile_screen.dart';
 import 'package:notehub/Screen/setting_screen.dart';
 import 'package:notehub/Screen/view_screen.dart';
+import 'package:notehub/data/student.dart';
 import 'package:notehub/models/task_model.dart';
 import 'package:notehub/widgets/custom_appbar.dart';
 import 'package:notehub/widgets/custom_listtile.dart';
@@ -22,7 +24,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<TaskModel> data =List.empty(growable: true);
+  // List<TaskModel> data =List.empty(growable: true);
+  List<Student> data = List.empty(growable: true);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,24 +52,25 @@ class _HomeScreenState extends State<HomeScreen> {
               child: InkWell(
                 onTap: (){
 
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>NoteViewScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=>ProfileScreen(name: "${data[index].name}", email: "${data[index].email}", phone: "${data[index].phone}", institute: "${data[index].institute}", semister: "${data[index].dept}", dept: "${data[index].semister}",description: "${data[index].description}",removeData: removeData,index: index,)));
 
                 },
                 child: CustomTeskCard(
                   colors: Colors.grey[200],
                   leading: CircleAvatar(
-                    radius: 10,
-                    child: CustomText(text: "${index +1}"),
+                    radius: 20,
+                    backgroundColor: Colors.grey[100],
+                    child: CustomText(text: "${index + 1}"),
                   ),
-                  title: CustomText(text: "${data[index].title}",textStyle: TextStyle(
+                  title: CustomText(text: "${data[index].name}",textStyle: TextStyle(
                       fontSize: 17,fontWeight: FontWeight.bold
                   ),),
-                  subTitle: CustomText(text: "${data[index].subtitle}",textStyle: TextStyle(
+                  subTitle: CustomText(text: "${data[index].email}",textStyle: TextStyle(
                     fontSize: 13,overflow: TextOverflow.ellipsis,
                   ),),
                   trailing: IconButton(onPressed: (){
-                    removeData(index);
-                  }, icon:Icon(Icons.delete)),
+                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentEdit()));
+                  }, icon:Icon(Icons.edit)),
                 ),
               ),
             ),
@@ -77,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
         width: 65,
         child: FloatingActionButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentAdd()));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentAdd(addStudnet: addStudent)));
           },
           backgroundColor: Colors.blue,
           shape:CircleBorder(),
@@ -140,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 16,fontWeight: FontWeight.bold
               ),),
                 onPress: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+
                 },
               ),
               CustomListTile(leading: Icon(Icons.screen_lock_rotation_outlined,size: 27,),title: CustomText(text: "Login Screen",textStyle: TextStyle(
@@ -175,17 +180,20 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-  void addData(TaskModel note){
+  void addStudent(Student note){
     data.add(note);
     setState(() {
 
     });
   }
+
   void removeData(int index){
     data.removeAt(index);
     setState(() {
 
     });
+
+
   }
 }
 
