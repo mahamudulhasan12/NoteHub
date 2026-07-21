@@ -12,6 +12,7 @@ import 'package:notehub/models/task_model.dart';
 import 'package:notehub/widgets/custom_appbar.dart';
 import 'package:notehub/widgets/custom_listtile.dart';
 import 'package:notehub/widgets/custom_text.dart';
+import 'package:notehub/widgets/custom_textfield.dart';
 import 'package:notehub/widgets/task_card.dart';
 
 import '../widgets/custom_container.dart';
@@ -26,6 +27,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // List<TaskModel> data =List.empty(growable: true);
   List<Student> data = List.empty(growable: true);
+  TextEditingController search = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,63 +44,89 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body:ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (BuildContext context , index){
-          return  SizedBox(
-            height: 100,
-            width: double.infinity,
-            child: Center(
-              child: InkWell(
-                onTap: (){
+      body:Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          spacing: 10,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: CustomTextfield(controller: search, hintText: "Search Bar",outlineBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
 
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>ProfileScreen(name: "${data[index].name}", email: "${data[index].email}", phone: "${data[index].phone}", institute: "${data[index].institute}", semister: "${data[index].dept}", dept: "${data[index].semister}",description: "${data[index].description}",removeData: removeData,index: index,)));
-
-                },
-                child: CustomTeskCard(
-                  colors: Colors.grey[200],
-                  leading: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.grey[100],
-                    child: CustomText(text: "${index + 1}"),
-                  ),
-                  title: CustomText(text: "${data[index].name}",textStyle: TextStyle(
-                      fontSize: 17,fontWeight: FontWeight.bold
-                  ),),
-                  subTitle: CustomText(text: "${data[index].email}",textStyle: TextStyle(
-                    fontSize: 13,overflow: TextOverflow.ellipsis,
-                  ),),
-                  trailing: IconButton(
-                      onPressed: () async {
-                        Student? updatedStudent = await Navigator.push<Student>(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => StudentEdit(
-                              Name: data[index].name,
-                              Email: data[index].email,
-                              Phone: data[index].phone,
-                              Institute: data[index].institute,
-                              Semister: data[index].semister,
-                              Dept: data[index].dept,
-                              Description: data[index].description,
-                              index: index,
-                            ),
-                          ),
-                        );
-
-                        if (updatedStudent != null) {
-                          setState(() {
-                            data[index] = updatedStudent;
-                          });
-                        }
-                      },
-                      icon:Icon(Icons.edit
-                      )),
+                  ),inputType: TextInputType.text,),
                 ),
-              ),
+                Expanded(
+                  child: IconButton(onPressed: (){
+
+                  }, icon: Icon(Icons.search)
+                  ),
+                )
+              ],
             ),
-          );
-        },
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: data.length,
+              itemBuilder: (BuildContext context , index){
+                return  SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Center(
+                    child: InkWell(
+                      onTap: (){
+
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>ProfileScreen(name: "${data[index].name}", email: "${data[index].email}", phone: "${data[index].phone}", institute: "${data[index].institute}", semister: "${data[index].dept}", dept: "${data[index].semister}",description: "${data[index].description}",removeData: removeData,index: index,)));
+
+                      },
+                      child: CustomTeskCard(
+                        colors: Colors.grey[200],
+                        leading: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.grey[100],
+                          child: CustomText(text: "${index + 1}"),
+                        ),
+                        title: CustomText(text: "${data[index].name}",textStyle: TextStyle(
+                            fontSize: 17,fontWeight: FontWeight.bold
+                        ),),
+                        subTitle: CustomText(text: "${data[index].email}",textStyle: TextStyle(
+                          fontSize: 13,overflow: TextOverflow.ellipsis,
+                        ),),
+                        trailing: IconButton(
+                            onPressed: () async {
+                              Student? updatedStudent = await Navigator.push<Student>(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => StudentEdit(
+                                    Name: data[index].name,
+                                    Email: data[index].email,
+                                    Phone: data[index].phone,
+                                    Institute: data[index].institute,
+                                    Semister: data[index].semister,
+                                    Dept: data[index].dept,
+                                    Description: data[index].description,
+                                    index: index,
+                                  ),
+                                ),
+                              );
+
+                              if (updatedStudent != null) {
+                                setState(() {
+                                  data[index] = updatedStudent;
+                                });
+                              }
+                            },
+                            icon:Icon(Icons.edit
+                            )),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
       floatingActionButton: SizedBox(
         height: 60,
