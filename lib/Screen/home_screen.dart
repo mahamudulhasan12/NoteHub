@@ -68,9 +68,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   subTitle: CustomText(text: "${data[index].email}",textStyle: TextStyle(
                     fontSize: 13,overflow: TextOverflow.ellipsis,
                   ),),
-                  trailing: IconButton(onPressed: (){
-                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentEdit()));
-                  }, icon:Icon(Icons.edit)),
+                  trailing: IconButton(
+                      onPressed: () async {
+                        Student? updatedStudent = await Navigator.push<Student>(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StudentEdit(
+                              Name: data[index].name,
+                              Email: data[index].email,
+                              Phone: data[index].phone,
+                              Institute: data[index].institute,
+                              Semister: data[index].semister,
+                              Dept: data[index].dept,
+                              Description: data[index].description,
+                              index: index,
+                            ),
+                          ),
+                        );
+
+                        if (updatedStudent != null) {
+                          setState(() {
+                            data[index] = updatedStudent;
+                          });
+                        }
+                      },
+                      icon:Icon(Icons.edit
+                      )),
                 ),
               ),
             ),
@@ -186,6 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     });
   }
+
 
   void removeData(int index){
     data.removeAt(index);
